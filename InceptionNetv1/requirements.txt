@@ -1,0 +1,13 @@
+Tensorflow>=2.9.0
+pandas
+numpy
+google-cloud-storage
+notebook
+jupyterlab
+matplotlib==3.6.2
+Pillow
+pydot
+scikit-learn
+tensorflow-datasets
+tensorflow-hub
+argparse
