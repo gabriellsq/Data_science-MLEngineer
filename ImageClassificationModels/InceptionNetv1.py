@@ -1,6 +1,6 @@
 """
 Gabriel Q, 2023
-    python3 InceptionNetv1.py --seed random_seed compile
+    python3 ImageClassificationModels.py --seed random_seed compile
 
 """
 
@@ -17,7 +17,7 @@ import numpy as np
 import tensorflow.keras.backend as K
 import pickle
 from tensorflow.keras.models import load_model, Model
-
+from typing import Tuple
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--seed' , type=int, required=True)
@@ -94,10 +94,12 @@ def aux_out(inp,name=None):
     aux_out = Dense(200, activation='softmax', name=name)(dense1)
     return aux_out
 
-def inception_v1():
+def inception_v1(input_shape: Tuple):
     """Defining and compiling Inception Net v1"""
+    assert len(input_shape) == 3, "input shape on the wrong format"
+    #change the inputs
     K.clear_session()
-    inp = Input(shape=(56,56,3)) #check size
+    inp = Input(shape=(input_shape)) #check size
     stem_out = stem(inp)
     inc_3a = inception(stem_out, [(64,), (96, 128), (16, 32), (32,)])
     inc_3b = inception(inc_3a, [(128,), (128, 192), (32, 96), (64,)])
